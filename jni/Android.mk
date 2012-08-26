@@ -53,7 +53,7 @@ LOCAL_SRC_FILES := main.cpp logio.cpp gui/siminterface.cpp pc_system.cpp iodev/d
 	fpu/fpu_const.cpp fpu/fpu_load_store.cpp fpu/fpu_misc.cpp fpu/fpu_tags.cpp fpu/fpu_trans.cpp \
 	fpu/fpu.cpp fpu/fsincos.cpp fpu/fyl2x.cpp fpu/poly.cpp fpu/softfloat-muladd.cpp \
 	fpu/softfloat-round-pack.cpp fpu/softfloat-specialize.cpp fpu/softfloat.cpp \
-	fpu/softfloat16.cpp fpu/softfloatx80.cpp gui/rfb.cpp iodev/pit_wrap.cpp
+	fpu/softfloat16.cpp fpu/softfloatx80.cpp gui/rfb.cpp iodev/pit_wrap.cpp bxmain.cpp
 LOCAL_LDLIBS    := -llog -landroid -lc -stdc++
 
 include $(BUILD_SHARED_LIBRARY)
