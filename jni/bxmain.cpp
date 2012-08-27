@@ -4,7 +4,7 @@
 
 void bxmain();
 
-extern "C" JNIEXPORT void JNICALL Java_com_iver_testforbochsa_MainActivity_runbx(JNIEnv * env, jobject obj)
+extern "C" JNIEXPORT void JNICALL Java_com_example_testforbochsa_MainActivity_runbx(JNIEnv * env, jobject obj)
 {
 	bxmain();
 	return;
