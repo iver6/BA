@@ -994,7 +994,7 @@ D["BX_SUPPORT_ES1370"]=" 0"
 D["BX_SUPPORT_SOUNDLOW"]=" 0"
 D["BX_SUPPORT_GAMEPORT"]=" 0"
 D["BX_WITH_ANDROID"]=" 1"
-D["BX_USE_TEXTCONFIG"]=" 0"
+D["BX_USE_TEXTCONFIG"]=" 1"
   for (key in D) D_is_set[key] = 1
   FS = ""
 }

@@ -24130,12 +24130,7 @@ $as_echo "wxWidgets" >&6; }
   $as_echo "#define BX_USE_TEXTCONFIG 0" >>confdefs.h
 
 else
-	if test "$display_libs" = " android"; then
-  		$as_echo "#define BX_USE_TEXTCONFIG 0" >>confdefs.h
-  	else
-  		$as_echo "#define BX_USE_TEXTCONFIG 1" >>confdefs.h
-  	fi
-
+	$as_echo "#define BX_USE_TEXTCONFIG 1" >>confdefs.h
 fi
 
 if test "$bx_plugins" = 1; then

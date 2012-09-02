@@ -848,6 +848,10 @@ bx_bool load_and_init_display_lib(void)
   if (!strcmp(gui_name, "x"))
     PLUG_load_plugin (x, PLUGTYPE_OPTIONAL);
 #endif
+#if BX_WITH_ANDROID
+  if (!strcmp(gui_name, "android"))
+    PLUG_load_plugin (android, PLUGTYPE_OPTIONAL);
+#endif
 
 #if BX_GUI_SIGHANDLER
   // set the flag for guis requiring a GUI sighandler.

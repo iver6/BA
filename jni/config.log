@@ -454,7 +454,7 @@ configure:8541: checking whether stripping libraries is possible
 configure:8546: result: yes
 configure:8644: checking for shl_load
 configure:8644: gcc -o conftest -g -O2   conftest.c  >&5
-/tmp/cc0hPUr5.o: In function `main':
+/tmp/ccCMt0oa.o: In function `main':
 /home/hxz/workspace/BochsA/BA/jni/conftest.c:54: undefined reference to `shl_load'
 collect2: ld returned 1 exit status
 configure:8644: $? = 1
@@ -560,7 +560,7 @@ configure: failed program was:
 configure:8682: result: no
 configure:8687: checking for dlopen
 configure:8687: gcc -o conftest -g -O2   conftest.c  >&5
-/tmp/ccNi8Cbd.o: In function `main':
+/tmp/ccmYL7rg.o: In function `main':
 /home/hxz/workspace/BochsA/BA/jni/conftest.c:54: undefined reference to `dlopen'
 collect2: ld returned 1 exit status
 configure:8687: $? = 1
@@ -1776,7 +1776,7 @@ configure:20585: $? = 0
 configure:20585: result: yes
 configure:20597: checking for strrev
 configure:20597: gcc -o conftest -g -O2   conftest.c  >&5
-/tmp/ccF3arxe.o: In function `main':
+/tmp/ccQS5xsg.o: In function `main':
 /home/hxz/workspace/BochsA/BA/jni/conftest.c:109: undefined reference to `strrev'
 collect2: ld returned 1 exit status
 configure:20597: $? = 1
@@ -1896,7 +1896,7 @@ configure: failed program was:
 configure:20597: result: no
 configure:20609: checking for stricmp
 configure:20609: gcc -o conftest -g -O2   conftest.c  >&5
-/tmp/ccWxk5ig.o: In function `main':
+/tmp/cca0lewj.o: In function `main':
 /home/hxz/workspace/BochsA/BA/jni/conftest.c:109: undefined reference to `stricmp'
 collect2: ld returned 1 exit status
 configure:20609: $? = 1
@@ -2388,7 +2388,7 @@ configure:20764: $? = 0
 configure:20764: result: yes
 configure:20776: checking for fseek64
 configure:20776: gcc -o conftest -g -O2   conftest.c  >&5
-/tmp/cctSHjf6.o: In function `main':
+/tmp/ccbSP5g5.o: In function `main':
 /home/hxz/workspace/BochsA/BA/jni/conftest.c:133: undefined reference to `fseek64'
 collect2: ld returned 1 exit status
 configure:20776: $? = 1
@@ -2551,7 +2551,7 @@ configure:20962: result: yes
 configure:20985: checking for cos
 configure:20985: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c  >&5
 conftest.c:128:6: warning: conflicting types for built-in function 'cos' [enabled by default]
-/tmp/ccaWcZe5.o: In function `main':
+/tmp/ccOUMAKm.o: In function `main':
 /home/hxz/workspace/BochsA/BA/jni/conftest.c:139: undefined reference to `cos'
 collect2: ld returned 1 exit status
 configure:20985: $? = 1
@@ -2702,7 +2702,7 @@ configure:20985: result: no
 configure:20996: checking for floor
 configure:20996: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c  >&5
 conftest.c:128:6: warning: conflicting types for built-in function 'floor' [enabled by default]
-/tmp/ccD5A4mb.o: In function `main':
+/tmp/ccdn4U4s.o: In function `main':
 /home/hxz/workspace/BochsA/BA/jni/conftest.c:139: undefined reference to `floor'
 collect2: ld returned 1 exit status
 configure:20996: $? = 1
@@ -3913,24 +3913,24 @@ configure:23856: checking for default gui on this platform
 configure:23858: result: x11
 configure:24089: checking for display libraries
 configure:24091: result:  android
-configure:24161: checking for wget
-configure:24177: found /usr/bin/wget
-configure:24188: result: wget
-configure:24720: checking pthread.h usability
-configure:24720: gcc -c -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES conftest.c >&5
-configure:24720: $? = 0
-configure:24720: result: yes
-configure:24720: checking pthread.h presence
-configure:24720: gcc -E  -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES conftest.c
-configure:24720: $? = 0
-configure:24720: result: yes
-configure:24720: checking for pthread.h
-configure:24720: result: yes
-configure:24833: checking for the pthreads library -lpthreads
-configure:24866: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES   -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c -lpthreads  -lm >&5
+configure:24156: checking for wget
+configure:24172: found /usr/bin/wget
+configure:24183: result: wget
+configure:24715: checking pthread.h usability
+configure:24715: gcc -c -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES conftest.c >&5
+configure:24715: $? = 0
+configure:24715: result: yes
+configure:24715: checking pthread.h presence
+configure:24715: gcc -E  -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES conftest.c
+configure:24715: $? = 0
+configure:24715: result: yes
+configure:24715: checking for pthread.h
+configure:24715: result: yes
+configure:24828: checking for the pthreads library -lpthreads
+configure:24861: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES   -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c -lpthreads  -lm >&5
 /usr/bin/ld: cannot find -lpthreads
 collect2: ld returned 1 exit status
-configure:24866: $? = 1
+configure:24861: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -4086,7 +4086,7 @@ configure: failed program was:
 | #define BX_SUPPORT_SOUNDLOW 0
 | #define BX_SUPPORT_GAMEPORT 0
 | #define BX_WITH_ANDROID 1
-| #define BX_USE_TEXTCONFIG 0
+| #define BX_USE_TEXTCONFIG 1
 | /* end confdefs.h.  */
 | #include <pthread.h>
 | int
@@ -4098,16 +4098,16 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:24875: result: no
-configure:24822: checking whether pthreads work without any flags
-configure:24866: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES   -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c   -lm >&5
-/tmp/ccDiOaw9.o: In function `main':
+configure:24870: result: no
+configure:24817: checking whether pthreads work without any flags
+configure:24861: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES   -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c   -lm >&5
+/tmp/ccbu0Cad.o: In function `main':
 /home/hxz/workspace/BochsA/BA/jni/conftest.c:161: undefined reference to `pthread_join'
 /home/hxz/workspace/BochsA/BA/jni/conftest.c:162: undefined reference to `__pthread_register_cancel'
 /home/hxz/workspace/BochsA/BA/jni/conftest.c:163: undefined reference to `pthread_create'
 /home/hxz/workspace/BochsA/BA/jni/conftest.c:163: undefined reference to `__pthread_unregister_cancel'
 collect2: ld returned 1 exit status
-configure:24866: $? = 1
+configure:24861: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -4263,7 +4263,7 @@ configure: failed program was:
 | #define BX_SUPPORT_SOUNDLOW 0
 | #define BX_SUPPORT_GAMEPORT 0
 | #define BX_WITH_ANDROID 1
-| #define BX_USE_TEXTCONFIG 0
+| #define BX_USE_TEXTCONFIG 1
 | /* end confdefs.h.  */
 | #include <pthread.h>
 | int
@@ -4275,11 +4275,11 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:24875: result: no
-configure:24827: checking whether pthreads work with -Kthread
-configure:24866: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -Kthread  -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c   -lm >&5
+configure:24870: result: no
+configure:24822: checking whether pthreads work with -Kthread
+configure:24861: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -Kthread  -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c   -lm >&5
 gcc: error: unrecognized option '-Kthread'
-configure:24866: $? = 1
+configure:24861: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -4435,7 +4435,7 @@ configure: failed program was:
 | #define BX_SUPPORT_SOUNDLOW 0
 | #define BX_SUPPORT_GAMEPORT 0
 | #define BX_WITH_ANDROID 1
-| #define BX_USE_TEXTCONFIG 0
+| #define BX_USE_TEXTCONFIG 1
 | /* end confdefs.h.  */
 | #include <pthread.h>
 | int
@@ -4447,11 +4447,11 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:24875: result: no
-configure:24827: checking whether pthreads work with -kthread
-configure:24866: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -kthread  -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c   -lm >&5
+configure:24870: result: no
+configure:24822: checking whether pthreads work with -kthread
+configure:24861: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -kthread  -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c   -lm >&5
 gcc: error: unrecognized option '-kthread'
-configure:24866: $? = 1
+configure:24861: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -4607,7 +4607,7 @@ configure: failed program was:
 | #define BX_SUPPORT_SOUNDLOW 0
 | #define BX_SUPPORT_GAMEPORT 0
 | #define BX_WITH_ANDROID 1
-| #define BX_USE_TEXTCONFIG 0
+| #define BX_USE_TEXTCONFIG 1
 | /* end confdefs.h.  */
 | #include <pthread.h>
 | int
@@ -4619,12 +4619,12 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:24875: result: no
-configure:24833: checking for the pthreads library -llthread
-configure:24866: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES   -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c -llthread  -lm >&5
+configure:24870: result: no
+configure:24828: checking for the pthreads library -llthread
+configure:24861: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES   -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c -llthread  -lm >&5
 /usr/bin/ld: cannot find -llthread
 collect2: ld returned 1 exit status
-configure:24866: $? = 1
+configure:24861: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME ""
@@ -4780,7 +4780,7 @@ configure: failed program was:
 | #define BX_SUPPORT_SOUNDLOW 0
 | #define BX_SUPPORT_GAMEPORT 0
 | #define BX_WITH_ANDROID 1
-| #define BX_USE_TEXTCONFIG 0
+| #define BX_USE_TEXTCONFIG 1
 | /* end confdefs.h.  */
 | #include <pthread.h>
 | int
@@ -4792,36 +4792,36 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:24875: result: no
-configure:24827: checking whether pthreads work with -pthread
-configure:24866: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -pthread  -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c   -lm >&5
-configure:24866: $? = 0
-configure:24875: result: yes
-configure:24895: checking for joinable pthread attribute
-configure:24908: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -pthread  -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c   -lm >&5
-configure:24908: $? = 0
-configure:24940: result: PTHREAD_CREATE_JOINABLE
-configure:24947: checking if more special flags are required for pthreads
-configure:24954: result: no
-configure:24966: checking for cc_r
-configure:24994: result: gcc
-configure:25047: checking for APIC support (deprecated)
-configure:25057: result: no
-configure:25063: checking for X2APIC support (deprecated)
-configure:25073: result: no
-configure:25079: checking for VESA BIOS extensions (deprecated)
-configure:25089: result: no
-configure:25095: checking for ACPI extensions support (deprecated)
-configure:25105: result: no
-configure:25111: checking for instruction trace cache support (deprecated)
-configure:25121: result: no
-configure:25175: checking for gzip
-configure:25193: found /bin/gzip
-configure:25205: result: /bin/gzip
-configure:25215: checking for tar
-configure:25233: found /bin/tar
-configure:25245: result: /bin/tar
-configure:25359: creating ./config.status
+configure:24870: result: no
+configure:24822: checking whether pthreads work with -pthread
+configure:24861: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -pthread  -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c   -lm >&5
+configure:24861: $? = 0
+configure:24870: result: yes
+configure:24890: checking for joinable pthread attribute
+configure:24903: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -pthread  -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  conftest.c   -lm >&5
+configure:24903: $? = 0
+configure:24935: result: PTHREAD_CREATE_JOINABLE
+configure:24942: checking if more special flags are required for pthreads
+configure:24949: result: no
+configure:24961: checking for cc_r
+configure:24989: result: gcc
+configure:25042: checking for APIC support (deprecated)
+configure:25052: result: no
+configure:25058: checking for X2APIC support (deprecated)
+configure:25068: result: no
+configure:25074: checking for VESA BIOS extensions (deprecated)
+configure:25084: result: no
+configure:25090: checking for ACPI extensions support (deprecated)
+configure:25100: result: no
+configure:25106: checking for instruction trace cache support (deprecated)
+configure:25116: result: no
+configure:25170: checking for gzip
+configure:25188: found /bin/gzip
+configure:25200: result: /bin/gzip
+configure:25210: checking for tar
+configure:25228: found /bin/tar
+configure:25240: result: /bin/tar
+configure:25354: creating ./config.status
 
 ## ---------------------- ##
 ## Running config.status. ##
@@ -5387,6 +5387,6 @@ target_vendor='pc'
 #define BX_SUPPORT_SOUNDLOW 0
 #define BX_SUPPORT_GAMEPORT 0
 #define BX_WITH_ANDROID 1
-#define BX_USE_TEXTCONFIG 0
+#define BX_USE_TEXTCONFIG 1
 
 configure: exit 0

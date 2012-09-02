@@ -291,7 +291,7 @@
 
 // BX_USE_TEXTCONFIG should be set to 1 unless Bochs is compiled
 // for wxWidgets only.
-#define BX_USE_TEXTCONFIG 0
+#define BX_USE_TEXTCONFIG 1
 
 // A certain functions must NOT be fastcall even if compiled with fastcall
 // option, and those are callbacks from Windows which are defined either 

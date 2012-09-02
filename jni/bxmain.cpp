@@ -24,7 +24,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_iver_bochsandroid_MainActivity_runbx(
 		return;
 	}
 
-	char *argv[] = {"bochs","-q","-r",rcFilePath};
+	char *argv[] = {"bochs","-q","-f",rcFilePath};
 	bx_startup_flags.argc = 4;
 	bx_startup_flags.argv = argv;
 	bxmain();
@@ -43,7 +43,7 @@ bool GetrcFilePath(JNIEnv * env,jstring packagename,char * rcFilePath)
 		return false;
 	}
 
-	sprintf(rcFilePath,"/data/data/%s",str);
+	sprintf(rcFilePath,"/data/data/%s/rcconfig",str);
 
 	env->ReleaseStringUTFChars(packagename,str);
 

@@ -43,11 +43,11 @@ public class MainActivity extends Activity {
 		InputStream fis = null;
 		try{
         
-        	fis = getAssets().open("config");
+        	fis = getAssets().open("rcconfig");
         	
         	sPathOfrcfile = "/data/data/" + getPackageName();
         	
-        	fos = new FileOutputStream ( sPathOfrcfile + "/config");
+        	fos = new FileOutputStream ( sPathOfrcfile + "/rcconfig");
         	
         	while( (readcount = fis.read(buf)) > 0)
         	{
