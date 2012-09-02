@@ -94,6 +94,7 @@ if (test "$with_sdl" != yes) && \
    (test "$with_nogui" != yes) && \
    (test "$with_term" != yes) && \
    (test "$with_rfb" != yes) && \
+   (test "$with_android" != yes) && \
    (test "$with_amigaos" != yes) && \
    (test "$with_carbon" != yes) && \
    (test "$with_wx" != yes) && \
@@ -389,6 +390,10 @@ if test "$with_all_libs" = yes; then
 
   if test "$with_nogui" != yes; then
     with_nogui=yes
+  fi
+  
+  if test "$with_android" != yes; then
+    with_android=yes
   fi
 fi    # end of if $with_all_libs = yes
 
@@ -1818,6 +1823,10 @@ AC_ARG_WITH(rfb,
   [  --with-rfb                        use RFB protocol, works with VNC viewer],
   )
 
+AC_ARG_WITH(android,
+  [  --with-android                        use Android OS],
+  )
+
 AC_ARG_WITH(amigaos,
   [  --with-amigaos                    use AmigaOS (or MorphOS) GUI],
   )
@@ -2121,6 +2130,12 @@ if test "$with_nogui" = yes; then
   display_libs="$display_libs nogui"
   AC_DEFINE(BX_WITH_NOGUI, 1)
   SPECIFIC_GUI_OBJS="$SPECIFIC_GUI_OBJS \$(GUI_OBJS_NOGUI)"
+fi
+
+if test "$with_android" = yes; then
+  display_libs="$display_libs android"
+  AC_DEFINE(BX_WITH_ANDROID, 1)
+  SPECIFIC_GUI_OBJS="$SPECIFIC_GUI_OBJS \$(GUI_OBJS_ANDROID)"
 fi
 
 AC_MSG_CHECKING(for display libraries)

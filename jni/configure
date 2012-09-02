@@ -994,6 +994,7 @@ with_sdl
 with_svga
 with_wx
 with_all_libs
+with_android
 enable_xpm
 enable_apic
 enable_x2apic
@@ -1714,6 +1715,7 @@ Optional Packages:
   --with-svga                       use SVGALib libraries
   --with-wx                         use wxWidgets libraries
   --with-all-libs                   compile all guis that Bochs supports
+  --with-android			use Android GUI
 
 Some influential environment variables:
   CC          C compiler command
@@ -3296,6 +3298,7 @@ if (test "$with_sdl" != yes) && \
    (test "$with_amigaos" != yes) && \
    (test "$with_carbon" != yes) && \
    (test "$with_wx" != yes) && \
+   (test "$with_android" != yes) && \
    (test "$with_macos" != yes); then
   # use DEFAULT_GUI.  Set the appropriate variable.
   # DEFAULT_GUI must be set to one of the names above.  Otherwise, no
@@ -23724,6 +23727,12 @@ if test "${with_all_libs+set}" = set; then :
 fi
 
 
+# Check whether --with-android was given.
+if test "${with_android+set}" = set; then :
+  withval=$with_android;
+fi
+
+
 DASH="-"
 SLASH="/"
 CXXFP=""
@@ -24069,6 +24078,14 @@ if test "$with_nogui" = yes; then
   SPECIFIC_GUI_OBJS="$SPECIFIC_GUI_OBJS \$(GUI_OBJS_NOGUI)"
 fi
 
+if test "$with_android" = yes; then
+  display_libs="$display_libs android"
+  $as_echo "#define BX_WITH_ANDROID 1" >>confdefs.h
+
+fi
+
+
+
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for display libraries" >&5
 $as_echo_n "checking for display libraries... " >&6; }
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $display_libs" >&5
@@ -24113,7 +24130,11 @@ $as_echo "wxWidgets" >&6; }
   $as_echo "#define BX_USE_TEXTCONFIG 0" >>confdefs.h
 
 else
-  $as_echo "#define BX_USE_TEXTCONFIG 1" >>confdefs.h
+	if test "$display_libs" = " android"; then
+  		$as_echo "#define BX_USE_TEXTCONFIG 0" >>confdefs.h
+  	else
+  		$as_echo "#define BX_USE_TEXTCONFIG 1" >>confdefs.h
+  	fi
 
 fi
 

@@ -1,0 +1,2 @@
+set solib-search-path ./obj/local/armeabi
+directory /home/hxz/download/android-ndk-r8b/platforms/android-14/arch-arm/usr/include /home/hxz/download/android-ndk-r8b/sources/cxx-stl/system jni/instrument/stubs jni/cpu jni/iodev jni/gui /home/hxz/download/android-ndk-r8b/sources/cxx-stl/system/include

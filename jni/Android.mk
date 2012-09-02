@@ -17,7 +17,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 
-LOCAL_C_INCLUDES	:=	$(LOCAL_PATH)/instrument/stubs $(LOCAL_PATH)/cpu $(LOCAL_PATH)/iodev
+LOCAL_C_INCLUDES	:=	$(LOCAL_PATH)/instrument/stubs $(LOCAL_PATH)/cpu $(LOCAL_PATH)/iodev $(LOCAL_PATH)/gui
 LOCAL_MODULE    := vmcore
 LOCAL_SRC_FILES := main.cpp logio.cpp gui/siminterface.cpp pc_system.cpp iodev/devices.cpp cpu/init.cpp \
 	cpu/debugstuff.cpp memory/misc_mem.cpp gui/gui.cpp config.cpp gui/paramtree.cpp iodev/virt_timer.cpp \

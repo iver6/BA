@@ -282,15 +282,16 @@
 #define BX_WITH_CARBON 0
 #define BX_WITH_NOGUI 0
 #define BX_WITH_TERM 0
-#define BX_WITH_RFB 1
+#define BX_WITH_RFB 0
 #define BX_WITH_AMIGAOS 0
 #define BX_WITH_SDL 0
 #define BX_WITH_SVGA 0
 #define BX_WITH_WX 0
+#define BX_WITH_ANDROID 1
 
 // BX_USE_TEXTCONFIG should be set to 1 unless Bochs is compiled
 // for wxWidgets only.
-#define BX_USE_TEXTCONFIG 1
+#define BX_USE_TEXTCONFIG 0
 
 // A certain functions must NOT be fastcall even if compiled with fastcall
 // option, and those are callbacks from Windows which are defined either 
