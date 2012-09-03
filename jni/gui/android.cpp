@@ -40,6 +40,22 @@ void bx_android_gui_c::specific_init(int argc, char **argv,                     
          unsigned x_tilesize, unsigned y_tilesize,                          \
          unsigned header_bar_y)
 {
+	unsigned char fc, vc;
+	int i;
+
+	for(i = 0; i < 256; i++) {
+		for(int j = 0; j < 16; j++) {
+			vc = bx_vgafont[i].data[j];
+			fc = 0;
+			for (int b = 0; b < 8; b++) {
+				fc |= (vc & 0x01) << (7 - b);
+				vc >>= 1;
+			}
+			vga_charmap[i*32+j] = fc;
+		}
+	}
+
+
 	return;
 
 }
@@ -49,6 +65,21 @@ void bx_android_gui_c::text_update(Bit8u *old_text, Bit8u *new_text,            
                   unsigned long cursor_x, unsigned long cursor_y,           \
                   bx_vga_tminfo_t tm_info)
 {
+
+	bx_bool force_update = 0;
+
+	blink_mode = (tm_info.blink_flags & BX_TEXT_BLINK_MODE) > 0;
+	blink_state = (tm_info.blink_flags & BX_TEXT_BLINK_STATE) > 0;
+
+	if (blink_mode) {
+		if (tm_info.blink_flags & BX_TEXT_BLINK_TOGGLE)
+		  forceUpdate = 1;
+	  }
+
+	if(charmap_updated) {
+		force_update = 1;
+		charmap_updated = 0;
+	}
 	return;
 }
 
