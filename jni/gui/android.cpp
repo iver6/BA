@@ -13,6 +13,7 @@
 #include "bochs.h"
 #include "iodev/iodev.h"
 #include "iodev/vga.h"
+#include "font/vga.bitmap.h"
 
 
 #if BX_WITH_ANDROID
@@ -35,6 +36,9 @@ IMPLEMENT_GUI_PLUGIN_CODE(android)
 
 #define LOG_THIS theGui->
 
+
+static unsigned int text_rows=25, text_cols=80;
+static unsigned int font_height=16, font_width=8;
 
 void bx_android_gui_c::specific_init(int argc, char **argv,                           \
          unsigned x_tilesize, unsigned y_tilesize,                          \
@@ -65,21 +69,77 @@ void bx_android_gui_c::text_update(Bit8u *old_text, Bit8u *new_text,            
                   unsigned long cursor_x, unsigned long cursor_y,           \
                   bx_vga_tminfo_t tm_info)
 {
-
-	bx_bool force_update = 0;
+	Bit8u *old_line, *new_line;
+	Bit8u cAttr, cChar;
+	bx_bool force_update = 0,blink_mode,blink_state,gfxchar;
+	unsigned int curs, hchars, offset, rows, x, y, xc, yc;
 
 	blink_mode = (tm_info.blink_flags & BX_TEXT_BLINK_MODE) > 0;
 	blink_state = (tm_info.blink_flags & BX_TEXT_BLINK_STATE) > 0;
 
 	if (blink_mode) {
 		if (tm_info.blink_flags & BX_TEXT_BLINK_TOGGLE)
-		  forceUpdate = 1;
+			force_update = 1;
 	  }
 
 	if(charmap_updated) {
 		force_update = 1;
 		charmap_updated = 0;
 	}
+
+	if((tm_info.cs_start <= tm_info.cs_end) && (tm_info.cs_start < font_height) &&
+	 (cursor_y < text_rows) && (cursor_x < text_cols)) {
+		curs = cursor_y * tm_info.line_offset + cursor_x * 2;
+		old_text[curs] = ~new_text[curs];
+		} else {
+		curs = 0xffff;
+	}
+
+	rows = text_rows;
+	y = 0;
+	do {
+	hchars = text_cols;
+	new_line = new_text;
+	old_line = old_text;
+	offset = y * tm_info.line_offset;
+	yc = y * font_height ;
+	x = 0;
+	do {
+	  if (force_update || (old_text[0] != new_text[0])
+		  || (old_text[1] != new_text[1])) {
+		cChar = new_text[0];
+		if (blink_mode) {
+		  cAttr = new_text[1] & 0x7F;
+		  if (!blink_state && (new_text[1] & 0x80))
+			cAttr = (cAttr & 0x70) | (cAttr >> 4);
+		} else {
+		  cAttr = new_text[1];
+		}
+		gfxchar = tm_info.line_graphics && ((cChar & 0xE0) == 0xC0);
+		xc = x * font_width;
+		//DrawChar(xc, yc, font_width, font_height, 0, (char *)&vga_charmap[cChar<<5], cAttr, gfxchar);
+		/*
+		if(yc < rfbUpdateRegion.y) rfbUpdateRegion.y = yc;
+		if((yc + font_height - rfbUpdateRegion.y) > rfbUpdateRegion.height) rfbUpdateRegion.height = (yc + font_height - rfbUpdateRegion.y);
+		if(xc < rfbUpdateRegion.x) rfbUpdateRegion.x = xc;
+		if((xc + font_width - rfbUpdateRegion.x) > rfbUpdateRegion.width) rfbUpdateRegion.width = (xc + font_width - rfbUpdateRegion.x);
+		rfbUpdateRegion.updated = true;
+		*/
+		if (offset == curs) {
+		  cAttr = ((cAttr >> 4) & 0xF) + ((cAttr & 0xF) << 4);
+		 // DrawChar(xc, yc + tm_info.cs_start, font_width, tm_info.cs_end - tm_info.cs_start + 1,
+		//		   tm_info.cs_start, (char *)&vga_charmap[cChar<<5], cAttr, gfxchar);
+		}
+	  }
+	  x++;
+	  new_text+=2;
+	  old_text+=2;
+	  offset+=2;
+	} while (--hchars);
+	y++;
+	new_text = new_line + tm_info.line_offset;
+	old_text = old_line + tm_info.line_offset;
+	} while (--rows);
 	return;
 }
 

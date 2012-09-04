@@ -6,15 +6,22 @@ import java.io.InputStream;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends Activity {
 
+	vmView vv;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
+        
+        vv = new vmView(this);
+        setContentView(vv);
     }
 
     @Override
@@ -30,7 +37,11 @@ public class MainActivity extends Activity {
 		if(item.getItemId() == R.id.menu_start)
 		{
 			CopyFile();
+			runbx(getPackageName());
 		}
+		
+		
+		
 		return super.onOptionsItemSelected(item);
 	}
     
@@ -94,7 +105,7 @@ public class MainActivity extends Activity {
         	e.printStackTrace();
         }
 		
-		runbx(getPackageName());
+		
 		
 	
     }
@@ -104,4 +115,6 @@ public class MainActivity extends Activity {
     static {
         System.loadLibrary("vmcore");
     }
+    
+    
 }
