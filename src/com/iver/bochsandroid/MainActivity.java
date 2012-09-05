@@ -3,24 +3,26 @@ package com.iver.bochsandroid;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
-import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import java.util.concurrent.locks.*;
 
 public class MainActivity extends Activity {
 
-	vmView vv;
+	private vmView vv;
+	private vmThread vt;
+	
+	Lock BitMapLock;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
-        
+        BitMapLock = new ReentrantLock();
         vv = new vmView(this);
+        vt = new vmThread("vmThread",getPackageName(),BitMapLock);
+                
         setContentView(vv);
     }
 
@@ -37,7 +39,12 @@ public class MainActivity extends Activity {
 		if(item.getItemId() == R.id.menu_start)
 		{
 			CopyFile();
-			runbx(getPackageName());
+			if(vt.getState() == Thread.State.NEW) 
+			{
+				vt.start();
+				
+			}
+			
 		}
 		
 		
@@ -110,11 +117,7 @@ public class MainActivity extends Activity {
 	
     }
     
-    public native void runbx(String PackageName);
     
-    static {
-        System.loadLibrary("vmcore");
-    }
     
     
 }

@@ -14,7 +14,7 @@
 #include "iodev/iodev.h"
 #include "iodev/vga.h"
 #include "font/vga.bitmap.h"
-
+#include <jni.h>
 
 #if BX_WITH_ANDROID
 
@@ -37,8 +37,16 @@ IMPLEMENT_GUI_PLUGIN_CODE(android)
 #define LOG_THIS theGui->
 
 
+
 static unsigned int text_rows=25, text_cols=80;
 static unsigned int font_height=16, font_width=8;
+static Bit32u ScreenBitMap[16 * 8 * 25 * 80];
+
+static Bit32u AndroidPalette[256];
+
+extern jobject gbitmaplock;
+
+void DrawChar(int x, int y, int width, int height, int fonty, char *bmap, char color, bx_bool gfxchar);
 
 void bx_android_gui_c::specific_init(int argc, char **argv,                           \
          unsigned x_tilesize, unsigned y_tilesize,                          \
@@ -57,6 +65,11 @@ void bx_android_gui_c::specific_init(int argc, char **argv,                     
 			}
 			vga_charmap[i*32+j] = fc;
 		}
+	}
+
+	for(i = 0; i < 256; i++)
+	{
+		AndroidPalette[i] = 0xFFFFFFFF;
 	}
 
 
@@ -117,7 +130,7 @@ void bx_android_gui_c::text_update(Bit8u *old_text, Bit8u *new_text,            
 		}
 		gfxchar = tm_info.line_graphics && ((cChar & 0xE0) == 0xC0);
 		xc = x * font_width;
-		//DrawChar(xc, yc, font_width, font_height, 0, (char *)&vga_charmap[cChar<<5], cAttr, gfxchar);
+		DrawChar(xc, yc, font_width, font_height, 0, (char *)&vga_charmap[cChar<<5], cAttr, gfxchar);
 		/*
 		if(yc < rfbUpdateRegion.y) rfbUpdateRegion.y = yc;
 		if((yc + font_height - rfbUpdateRegion.y) > rfbUpdateRegion.height) rfbUpdateRegion.height = (yc + font_height - rfbUpdateRegion.y);
@@ -127,8 +140,8 @@ void bx_android_gui_c::text_update(Bit8u *old_text, Bit8u *new_text,            
 		*/
 		if (offset == curs) {
 		  cAttr = ((cAttr >> 4) & 0xF) + ((cAttr & 0xF) << 4);
-		 // DrawChar(xc, yc + tm_info.cs_start, font_width, tm_info.cs_end - tm_info.cs_start + 1,
-		//		   tm_info.cs_start, (char *)&vga_charmap[cChar<<5], cAttr, gfxchar);
+		  DrawChar(xc, yc + tm_info.cs_start, font_width, tm_info.cs_end - tm_info.cs_start + 1,
+				   tm_info.cs_start, (char *)&vga_charmap[cChar<<5], cAttr, gfxchar);
 		}
 	  }
 	  x++;
@@ -173,6 +186,7 @@ void bx_android_gui_c::clear_screen(void)
 bx_bool bx_android_gui_c::palette_change(unsigned index,                              \
 			unsigned red, unsigned green, unsigned blue)
 {
+	AndroidPalette[index] = (red << 16) | (green << 8) | blue;
 	return 1;
 }
 
@@ -235,5 +249,61 @@ void bx_android_gui_c::show_ips(Bit32u ips_count)
 {
 	return;
 }
+
+void DrawChar(int x, int y, int width, int height, int fonty, char *bmap, char color, bx_bool gfxchar)
+{
+  static unsigned char newBits[8 * 16];
+  unsigned char mask;
+  int bytes = width * height;
+  char fgcolor, bgcolor;
+  static char vgaPalette[] = {
+       (char)0x00, //Black
+       (char)0x01, //Dark Blue
+       (char)0x02, //Dark Green
+       (char)0x03, //Dark Cyan
+       (char)0x04, //Dark Red
+       (char)0x05, //Dark Magenta
+       (char)0x06, //Brown
+       (char)0x07, //Light Gray
+       (char)0x38, //Dark Gray
+       (char)0x09, //Light Blue
+       (char)0x12, //Green
+       (char)0x1B, //Cyan
+       (char)0x24, //Light Red
+       (char)0x2D, //Magenta
+       (char)0x36, //Yellow
+       (char)0x3F  //White
+  };
+
+  bgcolor = vgaPalette[(color >> 4) & 0xF];
+  fgcolor = vgaPalette[color & 0xF];
+
+  for(int i = 0; i < bytes; i+=width) {
+    mask = 0x80;
+    for(int j = 0; j < width; j++) {
+      if (mask > 0) {
+        newBits[i + j] = (bmap[fonty] & mask) ? fgcolor : bgcolor;
+      } else {
+        if (gfxchar) {
+          newBits[i + j] = (bmap[fonty] & 0x01) ? fgcolor : bgcolor;
+        } else {
+          newBits[i + j] = bgcolor;
+        }
+      }
+      mask >>= 1;
+    }
+    fonty++;
+  }
+  //UpdateScreen(newBits, x, y, width, height, false);
+
+  for(int i = 0;i < height; i++){
+	  for (int j = 0; j < width; j++) {
+		  ScreenBitMap[(y * font_height + i) * text_cols * font_width  + x * font_width + j ] = AndroidPalette[newBits[i + j]];
+	  }
+  }
+
+}
+
+
 
 #endif

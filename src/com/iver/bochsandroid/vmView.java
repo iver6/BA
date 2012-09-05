@@ -24,6 +24,7 @@ public class vmView extends View {
 	
 	public void onDraw(Canvas canvas){  
 		super.onDraw(canvas);
+		//canvas.drawBitmap(bitmap, matrix, paint)
 	}
 
 }

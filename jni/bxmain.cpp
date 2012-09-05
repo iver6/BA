@@ -13,16 +13,21 @@ extern bx_startup_flags_t bx_startup_flags;
 
 bool GetrcFilePath(JNIEnv * env,jstring packagename,char * rcFilePath);
 
+jobject gbitmaplock;
 
-extern "C" JNIEXPORT void JNICALL Java_com_iver_bochsandroid_MainActivity_runbx(JNIEnv * env, jobject obj,
-		jstring packagename)
+extern "C" JNIEXPORT void JNICALL Java_com_iver_bochsandroid_vmThread_runbx(JNIEnv * env, jobject obj,
+		jstring packagename,jobject bitmaplock)
 {
+
+	gbitmaplock = bitmaplock;
 
 	char rcFilePath[PATH_MAX];
 	if(!GetrcFilePath(env,packagename,rcFilePath))
 	{
 		return;
 	}
+
+	gbitmaplock = bitmaplock;
 
 	char *argv[] = {"bochs","-q","-f",rcFilePath};
 	bx_startup_flags.argc = 4;
