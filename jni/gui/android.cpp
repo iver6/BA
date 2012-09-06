@@ -40,13 +40,13 @@ IMPLEMENT_GUI_PLUGIN_CODE(android)
 
 static unsigned int text_rows=25, text_cols=80;
 static unsigned int font_height=16, font_width=8;
-static Bit32u ScreenBitMap[16 * 8 * 25 * 80];
+static int ScreenBitMap[25 * 80 * 16 * 8];
 
-static Bit32u AndroidPalette[256];
+static int AndroidPalette[256];
 
-extern jobject gbitmaplock;
 
 void DrawChar(int x, int y, int width, int height, int fonty, char *bmap, char color, bx_bool gfxchar);
+void CallJNI_vmThread_newBitMap(int * ScreenBitMap,int pWidth,int pHeight);
 
 void bx_android_gui_c::specific_init(int argc, char **argv,                           \
          unsigned x_tilesize, unsigned y_tilesize,                          \
@@ -72,6 +72,7 @@ void bx_android_gui_c::specific_init(int argc, char **argv,                     
 		AndroidPalette[i] = 0xFFFFFFFF;
 	}
 
+	//ScreenBitMap = new int [font_width * text_cols * text_rows * font_height] ;
 
 	return;
 
@@ -153,6 +154,8 @@ void bx_android_gui_c::text_update(Bit8u *old_text, Bit8u *new_text,            
 	new_text = new_line + tm_info.line_offset;
 	old_text = old_line + tm_info.line_offset;
 	} while (--rows);
+
+	CallJNI_vmThread_newBitMap(ScreenBitMap,text_cols * font_width,font_height * text_rows);
 	return;
 }
 
@@ -250,11 +253,13 @@ void bx_android_gui_c::show_ips(Bit32u ips_count)
 	return;
 }
 
+
+
 void DrawChar(int x, int y, int width, int height, int fonty, char *bmap, char color, bx_bool gfxchar)
 {
   static unsigned char newBits[8 * 16];
   unsigned char mask;
-  int bytes = width * height;
+  int bytes = width * height,iIndex;
   char fgcolor, bgcolor;
   static char vgaPalette[] = {
        (char)0x00, //Black
@@ -298,9 +303,12 @@ void DrawChar(int x, int y, int width, int height, int fonty, char *bmap, char c
 
   for(int i = 0;i < height; i++){
 	  for (int j = 0; j < width; j++) {
-		  ScreenBitMap[(y * font_height + i) * text_cols * font_width  + x * font_width + j ] = AndroidPalette[newBits[i + j]];
+		  //iIndex = (y * font_height + i) * text_cols * font_width  + x * font_width + j;
+		  iIndex = (y + i) * text_cols * font_width  + x + j;
+		  ScreenBitMap[iIndex] = AndroidPalette[newBits[i * width  + j]];
 	  }
   }
+
 
 }
 

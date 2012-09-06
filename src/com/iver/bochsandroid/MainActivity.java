@@ -4,10 +4,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import android.os.Bundle;
+import android.os.Message;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
 import java.util.concurrent.locks.*;
+import 	android.os.Handler;
 
 public class MainActivity extends Activity {
 
@@ -15,13 +17,26 @@ public class MainActivity extends Activity {
 	private vmThread vt;
 	
 	Lock BitMapLock;
+	
+	
+	private Handler mhandler = new Handler()	{
+		public void handleMessage(Message msg)
+		{
+			if(msg.what == 1)
+			{
+				vv.invalidate();
+			}
+		}
+	};
+	
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
         BitMapLock = new ReentrantLock();
-        vv = new vmView(this);
-        vt = new vmThread("vmThread",getPackageName(),BitMapLock);
+        vv = new vmView(this,BitMapLock);
+        vt = new vmThread("vmThread",getPackageName(),BitMapLock,vv,mhandler);
                 
         setContentView(vv);
     }
@@ -31,6 +46,8 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
+    
+    
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
